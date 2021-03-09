@@ -1,0 +1,3 @@
+fileignoreconfig:
+- filename: .devcontainer/scripts/docker-debian.sh
+  checksum: 3109be3be53c3dad4a7cfcd0c07c87cd41ab26cc24e1fd4110fe69ecb955ae9a

@@ -1,0 +1,38 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.155.1/containers/ubuntu
+{
+	"name": "repo-template",
+	"build": {
+		"dockerfile": "Dockerfile",
+		// Update 'VARIANT' to pick an Ubuntu version: focal, bionic$
+		"args": { "VARIANT": "focal" }
+	},
+	// Set *default* container specific settings.json values on container create.
+	"settings": {
+    "terminal.integrated.shell.linux": "/bin/bash",
+	},
+	// "overrideCommand": false,
+	"workspaceMount": "source=${localWorkspaceFolder},target=/home/f5-devops/workspace,type=bind,consistency=cached",
+	"workspaceFolder": "/home/f5-devops/workspace",
+  "mounts": [ "source=/var/run/docker.sock,target=/var/run/docker-host.sock,type=bind" ],
+  // privileged can be dangerous, this is currently how we allow docker in docker for ansible containers.
+	"runArgs": [ "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined", "--privileged" ],
+	// Add the IDs of extensions you want installed when the container is created.
+	"extensions": [
+    "f5devcentral.vscode-f5",
+    "eamodio.gitlens",
+    "github.vscode-pull-request-github",
+    "github.github-vscode-theme",
+    "ms-vsliveshare.vsliveshare",
+    "ms-vsonline.vsonline",
+    "ms-azuretools.vscode-docker"
+	],
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+  "postCreateCommand": "/bin/bash ./.devcontainer/scripts/tools.sh 2>&1 | tee -a ~/post-create-tools.log",
+
+	// Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+	"remoteUser": "f5-devops"
+}
