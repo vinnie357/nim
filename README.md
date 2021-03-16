@@ -1,5 +1,5 @@
 # NIM
-NGINX instance manager using f5-devops-containers
+[NGINX instance manager](https://www.nginx.com/blog/introducing-nginx-instance-manager) using f5-devops-containers
 ---
 
 includes:
@@ -17,6 +17,11 @@ gcloud auth login
 gcloud config set project $PROJECT_ID
 gcloud auth application-default login
 ```
+## licenses
+
+- [NGINX Instance Manager](https://my.f5.com/manage/s/)
+- [NGINX+](https://www.nginx.com/free-trial-request)
+
 
 ## running
 
