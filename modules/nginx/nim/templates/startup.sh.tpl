@@ -40,15 +40,19 @@ wget https://nginx.org/keys/nginx_signing.key
 apt-key add nginx_signing.key
 apt-get install apt-transport-https lsb-release ca-certificates
 
-
+# instance manager
 printf "deb https://pkgs.nginx.com/instance-manager/debian stable nginx-plus\n" | tee /etc/apt/sources.list.d/instance-manager.list
 wget -q -O /etc/apt/apt.conf.d/90pkgs-nginx https://cs.nginx.com/static/files/90pkgs-nginx
+# nginx-plus
+printf "deb https://plus-pkgs.nginx.com/ubuntu `lsb_release -cs` nginx-plus\n" | tee /etc/apt/sources.list.d/nginx-plus.list
+wget -q -O /etc/apt/apt.conf.d/90nginx https://cs.nginx.com/static/files/90nginx
 
 apt-get update
 
 # install
 echo "==== install ===="
 apt-get install -y nginx-manager
+apt-get install -y nginx-plus
 
 function fileInstall {
 # file download install
@@ -132,29 +136,8 @@ apt install -y nginx-manager-selinux
 semanage port -a -t nginx-manager_port_t -p tcp 10001
 semanage port -a -t nginx-manager_port_t -p tcp 11001
 }
-# start
-echo "==== start service ===="
-systemctl start nginx-manager
-systemctl enable nginx-manager
 
-function NGINX {
-secrets=$(gcloud secrets versions access latest --secret="${secretName}")
-# cert
-cat << EOF > /etc/ssl/nginx/nginx-repo.crt
-$(echo $secrets | jq -r .nginxCert)
-EOF
-# key
-cat << EOF > /etc/ssl/nginx/nginx-repo.key
-$(echo $secrets | jq -r .nginxKey)
-EOF
-# get packages
-apt-get install apt-transport-https lsb-release ca-certificates -y
-printf "deb https://plus-pkgs.nginx.com/ubuntu `lsb_release -cs` nginx-plus\n" | sudo tee /etc/apt/sources.list.d/nginx-plus.list
-wget -q -O /etc/apt/apt.conf.d/90nginx https://cs.nginx.com/static/files/90nginx
-# install nginx-plus
-apt-get update
-apt-get install -y nginx-plus
-
+function PLUS_CONFIG {
 # grpc errors map
 cat << 'EOF' > /etc/nginx/conf.d/errors.grpc_conf
 # Standard HTTP-to-gRPC status code mappings
@@ -460,9 +443,15 @@ server {
     }
 }
 EOF
-echo "==== nginx-plus done ===="
+echo "==== nginx-plus config done ===="
 }
-
+PLUS_CONFIG
+# start
+echo "==== start service ===="
+systemctl start nginx-manager
+systemctl start nginx
+systemctl enable nginx-manager
+systemctl enable nginx
 echo "==== done ===="
 #systemctl status nginx-manager
 exit

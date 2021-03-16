@@ -19,3 +19,5 @@ fileignoreconfig:
   checksum: cf2fed3517026dafbcc01eace5e0cd38bb376376baf3782fd761b0c9a74681c1
 - filename: modules/nginx/nim/templates/startup.sh.tpl
   checksum: 7601bf9f0455bcf0763d3b313923adf18d8d6274454c4fe766184890ea1b03e3
+- filename: terraform/gcp/admin.auto.tfvars.example
+  checksum: f80d9e5389e21870d9c30f1d8878a5b3b780bc6d4262d9b39af1b38115ff5dbe

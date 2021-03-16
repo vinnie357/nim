@@ -1,0 +1,28 @@
+# project
+projectPrefix = "demo-nim"
+gcpProjectId  = "my-project"
+gcpRegion     = "us-east1"
+gcpZone       = "us-east1-b"
+# admin
+adminAccountName   = "zadmin"
+adminPassword      = "pleaseusevault123!"
+adminSourceAddress = ["0.0.0.0/0"]
+sshPublicKey       = "ssh-rsa AAAA"
+# nim
+nimCert    = <<EOT
+fdasfsadf
+EOT
+nimKey     = <<EOT
+dfasfafsd
+EOT
+nimLicense = <<EOT
+fdsaf
+EOT
+# nginx
+nginxCert = <<EOT
+fdsafasd
+EOT
+nginxKey  = <<EOT
+fdsaf
+EOT
+#https://github.com/hashicorp/terraform/issues/4835#issuecomment-313280534
