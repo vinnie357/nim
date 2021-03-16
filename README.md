@@ -1,5 +1,5 @@
-# repository_template
-base repository template using f5-devops-containers
+# NIM
+NGINX instance manager using f5-devops-containers
 ---
 
 includes:
@@ -8,6 +8,28 @@ includes:
 - docker
 - terraform
 - terraform-docs
+- gcloud cli
+
+## login
+```bash
+PROJECT_ID="myprojectid"
+gcloud auth login
+gcloud config set project $PROJECT_ID
+gcloud auth application-default login
+```
+
+## running
+
+set your vars in admin.auto.tfvars
+
+```bash
+cp admin.auto.tfvars.example admin.auto.tfvars
+```
+
+add scripts and start setup
+```bash
+. init.sh && setup
+```
 ## Development
 
 don't forget to add your git user config

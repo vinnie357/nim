@@ -1,3 +1,21 @@
 fileignoreconfig:
 - filename: .devcontainer/scripts/docker-debian.sh
   checksum: 3109be3be53c3dad4a7cfcd0c07c87cd41ab26cc24e1fd4110fe69ecb955ae9a
+- filename: modules/nginx/nim/main.tf
+  checksum: a280e1b2808833636670f2cfc46867ef2ea228254ad34e04951b39bc949d38dc
+- filename: modules/nginx/nim/iam.tf
+  checksum: b0a43278281680160c799ec0c104395542a2bf5c0fcdbb66b811bf10a74e8421
+- filename: .devcontainer/scripts/gcloud-debian.sh
+  checksum: f6435a020a039c63428853691e911b2e559ed2ed3423b1f6edfda926aa270aa9
+- filename: modules/nginx/nim/templates/nginx-plus/nim_gui.conf
+  checksum: be3a320e36eefe4567d147f481e1e0dd43879175d74c672591a82621e7de10c9
+- filename: modules/nginx/nim/secrets.tf
+  checksum: 81e061a1492dd6405bb36b6eaff0eeac1271f3405e04d875c75db23f810e0f70
+- filename: terraform/gcp/main.tf
+  checksum: 7f602cfcec9955767b69c3a9ce2839e4b0b506ed7606d68a435e704c4b834a2a
+- filename: modules/nginx/nim/templates/nginx-plus/nim_grpc.conf
+  checksum: d7e17415290932c34b06b6b88159c88fc44998cfb9b21cb0e16b1c5486a6ddd6
+- filename: modules/nginx/nim/templates/nginx-plus/nim_basic.conf
+  checksum: cf2fed3517026dafbcc01eace5e0cd38bb376376baf3782fd761b0c9a74681c1
+- filename: modules/nginx/nim/templates/startup.sh.tpl
+  checksum: 7601bf9f0455bcf0763d3b313923adf18d8d6274454c4fe766184890ea1b03e3
