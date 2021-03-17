@@ -25,7 +25,9 @@ resource "google_compute_instance" "vm_instance" {
     }
   }
 
+  // ssh-keys = join("\n", [for user, key in var.ssh_keys : "${user}:${key}"])
   metadata = {
+
     ssh-keys               = "${var.adminAccountName}:${var.sshPublicKey}"
     block-project-ssh-keys = false
   }

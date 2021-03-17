@@ -2,7 +2,7 @@ fileignoreconfig:
 - filename: .devcontainer/scripts/docker-debian.sh
   checksum: 3109be3be53c3dad4a7cfcd0c07c87cd41ab26cc24e1fd4110fe69ecb955ae9a
 - filename: modules/nginx/nim/main.tf
-  checksum: a280e1b2808833636670f2cfc46867ef2ea228254ad34e04951b39bc949d38dc
+  checksum: 944b620cb1f6cbd086a647c3831a9d8c4d09c4e538c56de60db9b201de3c0947
 - filename: modules/nginx/nim/iam.tf
   checksum: b0a43278281680160c799ec0c104395542a2bf5c0fcdbb66b811bf10a74e8421
 - filename: .devcontainer/scripts/gcloud-debian.sh

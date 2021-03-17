@@ -51,3 +51,11 @@ module "nginx" {
   #instanceSize    = "n1-standard-2"
   instanceCount = 1
 }
+
+
+// Agent Key
+resource "tls_private_key" "agent" {
+  algorithm = "RSA"
+  rsa_bits  = 4096
+}
+//tls_private_key.agent.public_key_openssh

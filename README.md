@@ -53,3 +53,10 @@ testing pre-commit hooks:
   pre-commit run -a -v
   ```
 ---
+
+## todo
+agent manging nginx-plus on manager
+agent scripting
+agent ansible
+ssh keys user / agent / ansible
+internal CA for mtls agent connections
