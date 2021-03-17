@@ -13,7 +13,7 @@ exec 1>$LOG_FILE 2>&1
 
 echo "==== starting ===="
 apt-get update
-apt-get install jq apt-transport-https ca-certificates -y
+apt-get install jq apt-transport-https lsb-release ca-certificates -y
 # make folders
 mkdir /etc/ssl/nginx
 cd /etc/ssl/nginx
@@ -38,7 +38,6 @@ echo "==== repos ===="
 # add repo with signing key
 wget https://nginx.org/keys/nginx_signing.key
 apt-key add nginx_signing.key
-apt-get install apt-transport-https lsb-release ca-certificates
 
 # instance manager
 printf "deb https://pkgs.nginx.com/instance-manager/debian stable nginx-plus\n" | tee /etc/apt/sources.list.d/instance-manager.list
