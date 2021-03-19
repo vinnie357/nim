@@ -113,9 +113,9 @@ package=deb #replace with deb for debian/ubuntu
 agentpackage=$(ls $PWD/nginx-agent*.deb | tail -n 1) # for deb package if not defined
 agentconf=./nginx-agent.conf
 
-if package=rpm; then
+if [ "${package}" == 'rpm' ]; then
   packagerinstall="yum install -y"
-elif package=deb; then
+elif [ "${package}" == 'deb' ]; then
   packagerinstall="apt install"
 fi
 
