@@ -1,5 +1,9 @@
 # project
 admin.auto.tfvars
+# NIM
+nginx-manager.crt
+nginx-manager.key
+nginx-manager.lic
 # Local .terraform directories
 **/.terraform/*
 .terraform.lock.hcl

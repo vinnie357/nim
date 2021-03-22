@@ -23,3 +23,9 @@ fileignoreconfig:
   checksum: f80d9e5389e21870d9c30f1d8878a5b3b780bc6d4262d9b39af1b38115ff5dbe
 - filename: terraform/gcp/agent/readme.md
   checksum: 704d063f3274bf7a86e65f48759f9f26dfe00939fbd7aa01368c11ecb16a10c5
+- filename: docker/config/nginx-manager.conf
+  checksum: 048a1d971417eee6f0267b0d9f43898d2d4ef6d649c8807d5e97214ba5bd3667
+- filename: docker/config/nginx-manager-grpc.conf
+  checksum: 374a00bcf6321bf2af03847a68b04dfea31977d9961b901a8d03a49c444a270a
+- filename: docker/config/nginx-manager-noauth.conf
+  checksum: db92e55046365c3a4683fffde2ddb1097b77c4ee9ae761c1a3df1dbf417f6baa

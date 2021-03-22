@@ -74,10 +74,10 @@ echo "==== done ===="
 ## install
 ### vars
 server="104.196.169.81"
-server_private="10.0.30.7"
+server_private="192.168.3.63"
 cidr="10.0.30.0/24"
 ### agent conf
-cat << EOF > nginx-agent.conf
+cat << EOF > /etc/nginx-agent/nginx-agent.conf
 #
 # /etc/nginx-agent/nginx-agent.conf
 #
@@ -111,7 +111,7 @@ agentuser=$USER #replace with the username you are using for ssh
 package=deb #replace with deb for debian/ubuntu
 #agentpackage=$(ls $PWD/nginx-agent*.rpm | tail -n 1) # for rpm package if not defined
 agentpackage=$(ls $PWD/nginx-agent*.deb | tail -n 1) # for deb package if not defined
-agentconf=./nginx-agent.conf
+agentconf=/etc/nginx-agent/nginx-agent.conf
 
 if [ "${package}" == 'rpm' ]; then
   packagerinstall="yum install -y"
