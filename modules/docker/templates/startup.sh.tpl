@@ -95,8 +95,12 @@ rm $${path}/server.csr
 # echo "==== nginx-plus config done ===="
 # }
 # PLUS_CONFIG
+function DOCKER_APPS {
+  echo "==== docker apps ===="
+  docker run -d --name=grafana -p 3000:3000 grafana/grafana
 
-
+}
+DOCKER_APPS
 # NIM agent
 function nim_agent () {
 if [[ ${agent} != "none" ]]; then

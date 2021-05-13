@@ -37,8 +37,6 @@ fileignoreconfig:
   checksum: bcfa18b5c0cbf5423b82c98072132353092288564c582f1215c6bbff54f0f9a7
 - filename: modules/nginxPlus/templates/startup.sh.tpl
   checksum: 01a835531c0f63ec32176cc0027ab405848532ed5fdafd7a23fb457d4ab7caed
-- filename: nimRestExamples.md
-  checksum: d7d52567783c990e72c4569b12a07f0a157920dda432221668dd9a3850097cbc
 - filename: modules/docker/docker-plus.tf
   checksum: b5b00c0ca9108831750a68a78d3c6b357f6d2c64df9bbe98eefdf276623e6138
 - filename: modules/docker/iam.tf
@@ -55,3 +53,5 @@ fileignoreconfig:
   checksum: 19bdd32c0c85cbfba1cb0f70f6f571f761c9617b96a1c2b69bf894cc2743d743
 - filename: modules/nginx/iam.tf
   checksum: 74c32174cd1c775563a17c5719ad9db23e03608fe31ae9d38fdd80ff21c9cb3c
+- filename: nimRestExamples.md
+  checksum: 99817d88beb95b2b63f98ccbec4d3d5651532bce9d8bf793364fcd37eb16b54d
