@@ -40,6 +40,10 @@ variable "adminPassword" {
 variable "sshPublicKey" {
   description = "contents of admin ssh public key"
 }
+variable "githubToken" {
+  description = "github oauth token for private repos"
+  default     = ""
+}
 # nginx
 variable "nginxKey" {
   description = "key for nginxplus"
@@ -56,4 +60,17 @@ variable "nimCert" {
 }
 variable "nimLicense" {
   description = "license for NGINX instance Manager"
+}
+#okta oidc
+variable "oidcConfigUrl" {
+  description = "my oidc auto config url https://<name>.-admin.oktapreview.com/.well-known/openid-configuration"
+  default     = ""
+}
+variable "clientId" {
+  description = "okta client Id"
+  default     = ""
+}
+variable "clientSecret" {
+  description = "okta client secret"
+  default     = ""
 }

@@ -12,7 +12,7 @@ fileignoreconfig:
 - filename: modules/nginx/nim/secrets.tf
   checksum: 81e061a1492dd6405bb36b6eaff0eeac1271f3405e04d875c75db23f810e0f70
 - filename: terraform/gcp/main.tf
-  checksum: 7f602cfcec9955767b69c3a9ce2839e4b0b506ed7606d68a435e704c4b834a2a
+  checksum: 6a1f83034ebbbea8fd22f2c01aaae47a70474b65b19017888f2668673a90c570
 - filename: modules/nginx/nim/templates/nginx-plus/nim_grpc.conf
   checksum: d7e17415290932c34b06b6b88159c88fc44998cfb9b21cb0e16b1c5486a6ddd6
 - filename: modules/nginx/nim/templates/nginx-plus/nim_basic.conf
@@ -29,3 +29,29 @@ fileignoreconfig:
   checksum: 374a00bcf6321bf2af03847a68b04dfea31977d9961b901a8d03a49c444a270a
 - filename: docker/config/nginx-manager-noauth.conf
   checksum: db92e55046365c3a4683fffde2ddb1097b77c4ee9ae761c1a3df1dbf417f6baa
+- filename: modules/nginxPlus/secrets.tf
+  checksum: cc0c0bc636c3db79b84aa1aa12dfb46d38c4969a20cb4de922a14e7566f0e757
+- filename: modules/nginxPlus/iam.tf
+  checksum: e77cf9e0b76720f24a34a3e4947b38f3db9a5b5cf652a5e4d493f52ebca1a37f
+- filename: modules/nginxPlus/main.tf
+  checksum: bcfa18b5c0cbf5423b82c98072132353092288564c582f1215c6bbff54f0f9a7
+- filename: modules/nginxPlus/templates/startup.sh.tpl
+  checksum: 01a835531c0f63ec32176cc0027ab405848532ed5fdafd7a23fb457d4ab7caed
+- filename: nimRestExamples.md
+  checksum: d7d52567783c990e72c4569b12a07f0a157920dda432221668dd9a3850097cbc
+- filename: modules/docker/docker-plus.tf
+  checksum: b5b00c0ca9108831750a68a78d3c6b357f6d2c64df9bbe98eefdf276623e6138
+- filename: modules/docker/iam.tf
+  checksum: 327d461fa33b64bcbd80ebd1d715a281238ea2bda951c21d01656d947fa6deb9
+- filename: modules/docker/secrets.tf
+  checksum: c41ee6c2fc2a8c08982b218d91484013606b79295e204270a70ab8d0eee2ec93
+- filename: modules/nginx/main.tf
+  checksum: d7278285e5af38eda3081a7c5bb07469bbd971057d2ba1a89f10b3d3f0680cd8
+- filename: modules/nginx/templates/startup.sh.tpl
+  checksum: 46a543454cd64461332beaebaed6c11aca8861ee87d9c9090ec7d778407fa354
+- filename: modules/docker/templates/startup.sh.tpl
+  checksum: 5cf99d86d3d912b6691c3408fc8509d13b2718cf43df8ec3572f757ad4ef7124
+- filename: modules/nginx/secrets.tf
+  checksum: 19bdd32c0c85cbfba1cb0f70f6f571f761c9617b96a1c2b69bf894cc2743d743
+- filename: modules/nginx/iam.tf
+  checksum: 74c32174cd1c775563a17c5719ad9db23e03608fe31ae9d38fdd80ff21c9cb3c

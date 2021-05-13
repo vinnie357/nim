@@ -75,6 +75,8 @@ echo "==== done ===="
 ### vars
 server="104.196.169.81"
 server_private="192.168.3.63"
+## gcp
+server_private=$(curl -s -f --retry 20 'http://metadata.google.internal/computeMetadata/v1/instance/network-interfaces/0/ip' -H 'Metadata-Flavor: Google')
 cidr="10.0.30.0/24"
 ### agent conf
 cat << EOF > /etc/nginx-agent/nginx-agent.conf
@@ -129,15 +131,18 @@ done
 
 ```
 
-## agent conf
+## install one
 ```bash
+## expects ssh key in user profile and public on remote.
+local_ipv4="$(curl -s "http://metadata.google.internal/computeMetadata/v1/instance/network-interfaces/0/ip" -H "Metadata-Flavor: Google")"
+## agent conf
 cat << EOF > nginx-agent.conf
 #
 # /etc/nginx-agent/nginx-agent.conf
 #
 
 # Configuration file for NGINX Agent
-server: 10.0.30.2:10000
+server: $local_ipv4:10000
 log:
   level: info
   path: /var/log/nginx-agent/
@@ -149,4 +154,15 @@ nginx:
   plus_api_url: "http://127.0.0.1:8080/api"
   metrics_poll_interval: 1000ms
 EOF
+## install
+agentuser=vinnie
+agenthostname=10.0.30.4
+agentconf=./nginx-agent.conf
+sudo apt-get download nginx-agent
+agentpackage=$(ls $PWD/nginx-agent*.deb | tail -n 1)
+scp $agentpackage $agentuser@$agenthostname:~/
+ssh $agentuser@$agenthostname sudo "sudo apt-get install -y  ./nginx-agent*.deb"
+scp $agentconf $agentuser@$agenthostname:~/nginx-agent.conf
+ssh $agentuser@$agenthostname sudo mv -f ~/nginx-agent.conf /etc/nginx-agent/nginx-agent.conf
+ssh $agentuser@$agenthostname sudo systemctl enable nginx-agent --now
 ```

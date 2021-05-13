@@ -15,7 +15,7 @@ module "google_network" {
 
 //NGXIN Instance Manager
 module "nim" {
-  source           = "../../modules/nginx/nim"
+  source           = "../../modules/nim"
   gcpProjectId     = var.gcpProjectId
   projectPrefix    = var.projectPrefix
   adminAccountName = var.adminAccountName
@@ -31,8 +31,8 @@ module "nim" {
   #nginxKey        = var.nginxKey
 }
 
-// Nginx
-module "nginx" {
+// Nginx plus without agent
+module "nginxPlusNoAgent" {
   source               = "git::https://github.com/f5devcentral/f5-digital-customer-engagement-center//modules/google/terraform/nginx-plus?ref=main"
   gcpProjectId         = var.gcpProjectId
   gcpRegion            = var.gcpRegion
@@ -49,10 +49,84 @@ module "nginx" {
   #sshPublicKey     = file("/home/user/mykey.pub")
   #image = "ubuntu-os-cloud/ubuntu-1804-lts"
   #instanceSize    = "n1-standard-2"
-  instanceCount = 1
+  instanceCount = 5
 }
-
-
+// docker
+module "docker" {
+  source           = "../../modules/docker"
+  gcpProjectId     = var.gcpProjectId
+  projectPrefix    = "docker"
+  adminAccountName = var.adminAccountName
+  sshPublicKey     = var.sshPublicKey
+  vpc              = module.google_network.vpcs["public"].id
+  subnet           = module.google_network.subnets["public"].id
+  buildSuffix      = var.buildSuffix
+  nginxCert        = var.nginxCert
+  nginxKey         = var.nginxKey
+  publicIp         = true
+  githubToken      = var.githubToken
+  nimAgent         = true
+}
+// Nginx plus with agent
+module "nginxPlus" {
+  source = "../../modules/nginxPlus"
+  #source               = "git::https://github.com/f5devcentral/f5-digital-customer-engagement-center//modules/google/terraform/nginx-plus/?ref=main"
+  projectPrefix        = "nginxplus"
+  gcpProjectId         = var.gcpProjectId
+  gcpRegion            = var.gcpRegion
+  gcpZone              = var.gcpZone
+  nginxCert            = var.nginxCert
+  nginxKey             = var.nginxKey
+  buildSuffix          = var.buildSuffix
+  vpc                  = module.google_network.vpcs["public"].id
+  subnet               = module.google_network.subnets["public"].id
+  adminAccountName     = var.adminAccountName
+  adminAccountPassword = var.adminPassword != "" ? var.adminPassword : random_password.password.result
+  sshPublicKey         = var.sshPublicKey
+  tags                 = ["nginx", "plus"]
+  publicIp             = true
+  #sshPublicKey     = file("/home/user/mykey.pub")
+  #image = "ubuntu-os-cloud/ubuntu-1804-lts"
+  instanceType = "n1-standard-2"
+  #nim
+  #nimAddress = module.nim.info.nim.value.network_interface[0].network_ip
+  nimAgent = true
+  #nimAgentPublicKey = tls_private_key.nim-agent.public_key_openssh
+  #oidc
+  oidcConfigUrl = var.oidcConfigUrl
+  clientId      = var.clientId
+  clientSecret  = var.clientSecret
+}
+// Nginx
+module "nginx" {
+  source = "../../modules/nginx"
+  #source               = "git::https://github.com/f5devcentral/f5-digital-customer-engagement-center//modules/google/terraform/nginx-plus/?ref=main"
+  projectPrefix        = "nginxoss"
+  gcpProjectId         = var.gcpProjectId
+  gcpRegion            = var.gcpRegion
+  gcpZone              = var.gcpZone
+  nginxCert            = var.nginxCert
+  nginxKey             = var.nginxKey
+  buildSuffix          = var.buildSuffix
+  vpc                  = module.google_network.vpcs["public"].id
+  subnet               = module.google_network.subnets["public"].id
+  adminAccountName     = var.adminAccountName
+  adminAccountPassword = var.adminPassword != "" ? var.adminPassword : random_password.password.result
+  sshPublicKey         = var.sshPublicKey
+  tags                 = ["nginx", "oss"]
+  publicIp             = true
+  #sshPublicKey     = file("/home/user/mykey.pub")
+  #image = "ubuntu-os-cloud/ubuntu-1804-lts"
+  instanceType = "n1-standard-2"
+  #nim
+  #nimAddress = module.nim.info.nim.value.network_interface[0].network_ip
+  nimAgent = true
+  #nimAgentPublicKey = tls_private_key.nim-agent.public_key_openssh
+  #oidc
+  oidcConfigUrl = var.oidcConfigUrl
+  clientId      = var.clientId
+  clientSecret  = var.clientSecret
+}
 // Agent Key
 resource "tls_private_key" "agent" {
   algorithm = "RSA"

@@ -51,7 +51,7 @@ apt-get update
 
 # install
 echo "==== install ===="
-apt-get install -y nginx-manager
+apt-get install -y nginx-manager nginx-agent
 apt-get install -y nginx-plus
 
 function fileInstall {
@@ -163,11 +163,33 @@ EOF
 echo "==== nginx-plus config done ===="
 }
 PLUS_CONFIG
+#agent conf
+local_ipv4="$(curl -s "http://metadata.google.internal/computeMetadata/v1/instance/network-interfaces/0/ip" -H "Metadata-Flavor: Google")"
+cat << EOF > /etc/nginx-agent/nginx-agent.conf
+#
+# /etc/nginx-agent/nginx-agent.conf
+#
+
+# Configuration file for NGINX Agent
+server: $local_ipv4:10000
+log:
+  level: info
+  path: /var/log/nginx-agent/
+tags:
+  location: unspecified
+nginx:
+  bin_path: /usr/sbin/nginx
+  basic_status_url: "http://127.0.0.1:80/nginx_status"
+  plus_api_url: "http://127.0.0.1:8080/api"
+  metrics_poll_interval: 1000ms
+EOF
 # start
 echo "==== start service ===="
 systemctl start nginx-manager
+systemctl start nginx-agent
 systemctl start nginx
 systemctl enable nginx-manager
+systemctl enable nginx-agent
 systemctl enable nginx
 echo "==== done ===="
 #systemctl status nginx-manager

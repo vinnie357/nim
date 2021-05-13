@@ -1,6 +1,6 @@
 # startup script
 data "http" "template_onboard" {
-  url = var.onboardScript != "none" ? var.onboardScript : "https://raw.githubusercontent.com/vinnie357/bash-onboard-templates/master/nginx/gcp/nim/onboard.sh.tpl"
+  url = var.onboardScript != "none" ? var.onboardScript : "https://raw.githubusercontent.com/vinnie357/bash-onboard-templates/main/nginx/gcp/nim/onboard.sh.tpl"
 }
 
 data "template_file" "vm_onboard" {

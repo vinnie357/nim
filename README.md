@@ -35,6 +35,22 @@ add scripts and start setup
 ```bash
 . init.sh && setup
 ```
+## f5 and nim plugin for rest examples
+```bash
+extensionUrls="https://api.github.com/repos/f5devcentral/vscode-f5/releases/latest https://api.github.com/repos/f5devcentral/vscode-nim/releases/tags/v0.4.0"
+for downloadUrl in $extensionUrls
+do
+    wget $(curl -s $downloadUrl | jq -r '.assets[] | select(.name | contains (".vsix")) | .browser_download_url')
+done
+```
+## Just vscode NIM plugin
+```bash
+downloadUrl="https://api.github.com/repos/f5devcentral/vscode-nim/releases/tags/v0.4.0"
+wget $(curl -s $downloadUrl | jq -r '.assets[] | select(.name | contains (".vsix")) | .browser_download_url')
+## right click and install vsix in vscode
+# remove when done
+#rm vscode-nginx-0.4.0.vsix
+```
 ## Development
 
 don't forget to add your git user config
