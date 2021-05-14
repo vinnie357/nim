@@ -163,16 +163,16 @@ https://NIM/docs/guides/metrics/
 
       url = http://10.0.30.2:11000/metrics
    - `click` save and test
-      <img src="docs/images/datasource.PNG" width="500"/>]
+      <img src="docs/images/datasource.PNG" width="500"/>
 4. add a dashboard!
     - get the dashboard json from NIM
 
         https://35.231.64.108/docs/examples/grafana/nginx-manager.json
     - `click` create/plus and select `import`
     - paste in the json from NIM and select `load`
-      <img src="docs/images/importJSON.PNG" width="500"/>]
+        <img src="docs/images/importJSON.PNG" width="500"/>]
     - apply/import the json
-      <img src="docs/images/importDashboard.PNG" width="500"/>]
+        <img src="docs/images/importDashboard.PNG" width="500"/>]
 
       this should drop you to "general/NGINX landscape"
 
