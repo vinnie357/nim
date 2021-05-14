@@ -173,6 +173,7 @@ https://NIM/docs/guides/metrics/
       <img src="docs/images/importJSON.PNG" width="500"/>]
     - apply/import the json
       <img src="docs/images/importDashboard.PNG" width="500"/>]
+
       this should drop you to "general/NGINX landscape"
 
     - `enjoy all the pretty data`
