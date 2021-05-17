@@ -20,6 +20,7 @@
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
     "f5devcentral.vscode-f5",
+    "f5devcentral.vscode-nim",
     "eamodio.gitlens",
     "github.vscode-pull-request-github",
     "github.github-vscode-theme",

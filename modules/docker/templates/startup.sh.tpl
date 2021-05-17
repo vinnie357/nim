@@ -98,6 +98,7 @@ rm $${path}/server.csr
 function DOCKER_APPS {
   echo "==== docker apps ===="
   docker run -d --name=grafana -p 3000:3000 grafana/grafana
+  docker run -d --name=doom -p 3001:80 nzregularit/js-dos-doom
 
 }
 DOCKER_APPS
