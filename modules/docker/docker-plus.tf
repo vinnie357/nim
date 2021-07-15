@@ -11,6 +11,8 @@ data "template_file" "vm_onboard" {
     user         = var.adminAccountName
     GITHUB_TOKEN = var.githubToken
     agent        = var.nimAgent
+    nimVersion   = var.nimVersion
+    nimGrpcPort      = var.nimGrpcPort
   }
 }
 

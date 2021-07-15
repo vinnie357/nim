@@ -80,3 +80,10 @@ variable "nimAgent" {
   description = "install and start the nim agent"
   default     = "none"
 }
+variable "nimVersion" {
+  description = "version for NGINX instance Manager"
+}
+variable  "nimGrpcPort" {
+  description = "grpc port for nim"
+  default = 10000
+}

@@ -61,6 +61,14 @@ variable "nimCert" {
 variable "nimLicense" {
   description = "license for NGINX instance Manager"
 }
+variable "nimVersion" {
+  description = "version for NGINX instance Manager"
+  default     = "1.0.1-336280068"
+}
+variable "nimGrpcPort" {
+  description = "grpc port for nim"
+  default     = 10000
+}
 #okta oidc
 variable "oidcConfigUrl" {
   description = "my oidc auto config url https://<name>.-admin.oktapreview.com/.well-known/openid-configuration"

@@ -88,6 +88,13 @@ variable "nimAgent" {
   description = "install and start the nim agent"
   default     = "none"
 }
+variable "nimVersion" {
+  description = "version for NGINX instance Manager"
+}
+variable  "nimGrpcPort" {
+  description = "grpc port for nim"
+  default = 10000
+}
 #okta oidc
 variable "oidcConfigUrl" {
   description = "my oidc auto config url https://<name>.-admin.oktapreview.com/.well-known/openid-configuration"

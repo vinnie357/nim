@@ -1,4 +1,4 @@
-# nim in docker
+# nim-plus in docker
 
 JUST FOR TESTING DON"T USE ME
 
@@ -12,28 +12,33 @@ cp nginx-manager.lic licenses/nginx-manager.lic
 ```
 
 ## build
-docker build -t "nim" .
-
+docker build -t "nim-plus" .
 
 
 ## run
 ```bash
 docker run --rm -d \
-  --name nim \
+  --name nim-plus \
   -p 80:80 \
   -p 443:443 \
-  -p 10000:10000 \
-  -p 11000:11000 \
-	nim
+  -p 10002:10002 \
+	nim-plus
 ```
 
 ## with logs
 ```bash
 docker run  -i \
-  --name nim \
+  --name nim-plus \
   -p 80:80 \
   -p 443:443 \
-  -p 10000:10000 \
-  -p 11000:11000  \
-  nim
+  -p 10002:10002 \
+  nim-plus
+```
+
+## push to gcr
+
+```bash
+. init.sh
+push_gcr
+
 ```

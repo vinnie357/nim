@@ -66,6 +66,9 @@ variable "nimCert" {
 variable "nimLicense" {
   description = "license for NGINX instance Manager"
 }
+variable "nimVersion" {
+  description = "version for NGINX instance Manager"
+}
 #nginx-plus
 variable "nginxPlus" {
   description = "use nginx-plus to front instance Manager"

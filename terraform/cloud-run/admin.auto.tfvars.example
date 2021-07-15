@@ -1,0 +1,6 @@
+# project
+projectPrefix  = "nim-cloudrun"
+gcpProjectId   = "my-project"
+gcpRegion      = "us-central1"
+image          = "gcr.io/my-project/nim-plus@sha256:3fc64cbf8934ce998c7331215b85733fdf6905db4bdebcac97fb22f10ec4288a"
+serviceAccount = "svc-nim@my-project.iam.gserviceaccount.com"

@@ -10,6 +10,8 @@ data "template_file" "vm_onboard" {
     nimAgentPublicKey = var.nimAgentPublicKey
     agent             = var.nimAgent
     oidcConfigUrl     = var.oidcConfigUrl
+    nimVersion        = var.nimVersion
+    nimGrpcPort          = var.nimGrpcPort
   }
 }
 # GCE instance

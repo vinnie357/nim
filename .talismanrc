@@ -1,3 +1,4 @@
+#sort .talismanrc | uniq -d
 fileignoreconfig:
 - filename: .devcontainer/scripts/docker-debian.sh
   checksum: 3109be3be53c3dad4a7cfcd0c07c87cd41ab26cc24e1fd4110fe69ecb955ae9a
@@ -35,8 +36,6 @@ fileignoreconfig:
   checksum: e77cf9e0b76720f24a34a3e4947b38f3db9a5b5cf652a5e4d493f52ebca1a37f
 - filename: modules/nginxPlus/main.tf
   checksum: bcfa18b5c0cbf5423b82c98072132353092288564c582f1215c6bbff54f0f9a7
-- filename: modules/nginxPlus/templates/startup.sh.tpl
-  checksum: 01a835531c0f63ec32176cc0027ab405848532ed5fdafd7a23fb457d4ab7caed
 - filename: modules/docker/docker-plus.tf
   checksum: b5b00c0ca9108831750a68a78d3c6b357f6d2c64df9bbe98eefdf276623e6138
 - filename: modules/docker/iam.tf
@@ -45,13 +44,49 @@ fileignoreconfig:
   checksum: c41ee6c2fc2a8c08982b218d91484013606b79295e204270a70ab8d0eee2ec93
 - filename: modules/nginx/main.tf
   checksum: d7278285e5af38eda3081a7c5bb07469bbd971057d2ba1a89f10b3d3f0680cd8
-- filename: modules/nginx/templates/startup.sh.tpl
-  checksum: 46a543454cd64461332beaebaed6c11aca8861ee87d9c9090ec7d778407fa354
-- filename: modules/docker/templates/startup.sh.tpl
-  checksum: 5cf99d86d3d912b6691c3408fc8509d13b2718cf43df8ec3572f757ad4ef7124
 - filename: modules/nginx/secrets.tf
   checksum: 19bdd32c0c85cbfba1cb0f70f6f571f761c9617b96a1c2b69bf894cc2743d743
 - filename: modules/nginx/iam.tf
   checksum: 74c32174cd1c775563a17c5719ad9db23e03608fe31ae9d38fdd80ff21c9cb3c
 - filename: nimRestExamples.md
   checksum: 99817d88beb95b2b63f98ccbec4d3d5651532bce9d8bf793364fcd37eb16b54d
+- filename: docker/nginx-plus/Dockerfile
+  checksum: 359e7112332d0d05daea4fdb7971fd07ad20c0fe88c7a23cc2b80113be0d630b
+- filename: docker/nginx-plus/readme.md
+  checksum: 941e877755d63da5604e98f892edfd49e992bc2b5c86849d4dec0ba9f3029598
+- filename: terraform/cloud-run/admin.auto.tfvars.example
+  checksum: f8b4b86ac89a9f67b6065a5b29151f3a79b14f3db25b2531311951fb8bc8c35c
+- filename: docker/nim-plus-cloudrun/nim-config/nginx-agent.conf
+  checksum: 96523a4a6c68c203d2a3037e23e27af6525067b10491de587065e8ee73563b82
+- filename: docker/nim-plus-cloudrun/nginx-config/nginx-manager-grpc.conf
+  checksum: 81c922862bbc1faf4ccbe36779db00b598df44a5d1bca0477ffcd3ff8da47187
+- filename: docker/nim-plus-cloudrun/nginx-config/nginx-manager-noauth.conf
+  checksum: 50b04c88f4450a085bcae4fa8043ec2f2dd4caeea60f34605946ec21f6a0267c
+- filename: docker/nim-plus/nginx-config/nginx-manager-grpc.conf
+  checksum: 1eddbfa7fc78297552ff7e6f210eaa0195e23dbb3fdb7cdbc8602a47c5663bbc
+- filename: docker/nginx-plus/config/nginx-agent.conf
+  checksum: eb1d8042fdf60b75f212fb7f5b94334d6a5b0e6eb8f7d35a87b28fa2e04d1b0d
+- filename: docker/nim-plus/nginx-config/nginx-manager-noauth.conf
+  checksum: 8324bc3cd5850187211b8708e27da07099ae60432e0acd02b57ba6062031b99f
+- filename: modules/nim/templates/nginx-config/nginx-manager-grpc.conf
+  checksum: 2005e2c0ed72293b038fe627af2da5a5c659297a673d3db4ce03fcb18b5eb794
+- filename: modules/docker/templates/startup.sh.tpl
+  checksum: b36c6a7d2218718b3e5dd1aaa5dd85c575bf58c66a61df2977eea46f7f7f068c
+- filename: modules/nim/templates/nginx-config/nginx-manager-noauth.conf
+  checksum: 89f699d11d6f933a88ccb344676e7038816ea86680d0ef0698a610917d005fed
+- filename: docker/nim-plus/nim-config/nginx-agent.conf
+  checksum: 705768fd740f1009dc6f1d5e02a722a478b458ee49a210e12b332cba9d0bf48a
+- filename: scripts/new_cert.sh
+  checksum: 85f8826a9a742e8ab62651dd1482767708893003757b90986c2f34d5c2e1e561
+- filename: docker/nim-plus/nim-config/nginx-manager.conf
+  checksum: 1e54dac4b052bad9a1206acb1c7454fc007c6bf783fb021bf1b3bbb538a2c40a
+- filename: modules/nim/templates/startup.sh.tpl
+  checksum: 3ca8227cbbdecbfccae92eb0ad24f3f147e80d7f5dabc211099ec9957c65eadf
+- filename: modules/nim/templates/nim-config/nginx-manager.conf
+  checksum: eff9c15135c6e5c2d5a268d26814e15f0b068a92c044f0a83b1ae372c279200d
+- filename: modules/nginxPlus/templates/startup.sh.tpl
+  checksum: ad6a70e34bc8520b1df2f4286ab79aa0dcdaeed08051769f2cbf4a035cb48162
+- filename: docker/nim/config/nginx-manager.conf
+  checksum: e5b2a697d68ff9a4cceaa29251e70dcc201aa78d14e7c6173200502c12d59e40
+- filename: modules/nginx/templates/startup.sh.tpl
+  checksum: 97bea0b87f9cd5eb80c2df148aa89e207a02c8be1415cb68fec3ec6012002ee6

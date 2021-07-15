@@ -2,13 +2,45 @@
 data "http" "template_onboard" {
   url = var.onboardScript != "none" ? var.onboardScript : "https://raw.githubusercontent.com/vinnie357/bash-onboard-templates/main/nginx/gcp/nim/onboard.sh.tpl"
 }
-
+# nim-config
+data "local_file" "conf-manager" {
+    filename = "${path.module}/templates/nim-config/nginx-manager.conf"
+}
+# nginx-config
+data "local_file" "conf-grpc" {
+    filename = "${path.module}/templates/nginx-config/nginx-manager-grpc.conf"
+}
+data "local_file" "conf-grpc-errors" {
+    filename = "${path.module}/templates/nginx-config/errors.grpc_conf"
+}
+data "local_file" "conf-manager-noauth" {
+    filename = "${path.module}/templates/nginx-config/nginx-manager-noauth.conf"
+}
+data "local_file" "conf-status-api" {
+    filename = "${path.module}/templates/nginx-config/status-api.conf"
+}
+data "local_file" "conf-manager-upstreams" {
+    filename = "${path.module}/templates/nginx-config/nginx-manager-upstreams.conf"
+}
+data "local_file" "conf-stub-status" {
+    filename = "${path.module}/templates/nginx-config/stub-status.conf"
+}
 data "template_file" "vm_onboard" {
   template = var.onboardScript != "none" ? data.http.template_onboard.body : file("${path.module}/templates/startup.sh.tpl")
 
   vars = {
     secretName  = google_secret_manager_secret.nginx-secret.secret_id
     nginx-plus  = var.nginxPlus
+    nimVersion  = var.nimVersion
+    // nim-config
+    conf-manager = data.local_file.conf-manager.content
+    // nginx-config
+    conf-grpc = data.local_file.conf-grpc.content
+    conf-grpc-errors = data.local_file.conf-grpc-errors.content
+    conf-manager-noauth = data.local_file.conf-manager-noauth.content
+    conf-status-api = data.local_file.conf-status-api.content
+    conf-manager-upstreams = data.local_file.conf-manager-upstreams.content
+    conf-stub-status = data.local_file.conf-stub-status.content
   }
 }
 

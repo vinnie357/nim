@@ -90,11 +90,38 @@ rm $${path}/server.csr
 # $(echo $secrets | jq -r .webKey)
 # EOF
 
-# function PLUS_CONFIG {
+function PLUS_CONFIG {
+cat << EOF > /etc/nginx/conf.d/stub-status.conf
+#
+# /etc/nginx/conf.d/stub-status.conf
+#
+server {
+    listen 127.0.0.1:80;
+    server_name 127.0.0.1;
+    access_log off; # Don't log access here (test env)
+    location /nginx_status {
+        stub_status;
+    }
+}
+EOF
+cat > /etc/nginx/conf.d/api.conf <<EOF
+#
+# /etc/nginx/conf.d/api.conf
+#
+server {
+   listen 8080;
+   status_zone "Dashboard";
+   location /api { api write=on; }
+   location /dashboard.html { root /usr/share/nginx/html; }
+   access_log off;
+   allow  127.0.0.1/32;
+   deny   all;
+}
+EOF
+echo "==== nginx-plus config done ===="
+}
+PLUS_CONFIG
 
-# echo "==== nginx-plus config done ===="
-# }
-# PLUS_CONFIG
 function DOCKER_APPS {
   echo "==== docker apps ===="
   docker run -d --name=grafana -p 3000:3000 grafana/grafana
@@ -110,7 +137,7 @@ printf "deb https://pkgs.nginx.com/instance-manager/debian stable nginx-plus\n" 
 wget -q -O /etc/apt/apt.conf.d/90pkgs-nginx https://cs.nginx.com/static/files/90pkgs-nginx
 apt-get clean
 apt-get update
-apt-get install -y nginx-agent
+apt-get install -y nginx-agent=${nimVersion}
 nim_ipv4="$(gcloud compute instances list --filter "name:nim" --format json | jq .[0] | jq .networkInterfaces | jq -r .[0].networkIP)"
 cat << EOF > /etc/nginx-agent/nginx-agent.conf
 #
@@ -118,17 +145,44 @@ cat << EOF > /etc/nginx-agent/nginx-agent.conf
 #
 
 # Configuration file for NGINX Agent
-server: $nim_ipv4:10000
+
+# specify the server grpc port to connect to
+server: $nim_ipv4:${nimGrpcPort}
+
+#tls:
+  # enable tls in the nginx-manager setup for grpcs
+#  enable: true
+  # path to certificate
+#  cert: /etc/ssl/nginx-manager/agent.crt
+  # path to certificate key
+#  key: /etc/ssl/nginx-manager/agent.key
+  # path to CA cert
+#  ca: /etc/ssl/nginx-manager/ca.pem
 log:
+  # set log level (panic, fatal, error, info, debug, trace; default: info) (default "info")
   level: info
+  # set log path. if empty, don't log to file.
   path: /var/log/nginx-agent/
-tags:
+# (optional) tags for this specific instance / machine for inventory purposes
+metadata:
   location: unspecified
+# instance tags
+# tags:
+# - web
+# - staging
+# - etc
+# nginx configuration options
 nginx:
+  # path of nginx to manage
   bin_path: /usr/sbin/nginx
-  basic_status_url: "http://127.0.0.1:80/nginx_status"
-  plus_api_url: "http://127.0.0.1:8080/api"
+  # specify stub status URL (see: nginx.org/r/stub_status)
+  stub_status: "http://127.0.0.1:80/nginx_status"
+  # specify plus status api url (see nginx.org/r/api)
+  plus_api: "http://127.0.0.1:8080/api"
+  # specify metrics poll interval
   metrics_poll_interval: 1000ms
+  # specify access logs to exclude from metrics (comma separated)
+  #exclude_logs: /var/log/nginx/skipthese*,/var/log/nginx/special-access.log
 EOF
 systemctl start nginx-agent
 systemctl enable nginx-agent

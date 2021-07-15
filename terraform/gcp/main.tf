@@ -26,6 +26,7 @@ module "nim" {
   nimCert          = var.nimCert
   nimKey           = var.nimKey
   nimLicense       = var.nimLicense
+  nimVersion       = var.nimVersion
   #nginxPlus       = true
   #nginxCert       = var.nginxCert
   #nginxKey        = var.nginxKey
@@ -66,6 +67,7 @@ module "docker" {
   publicIp         = true
   githubToken      = var.githubToken
   nimAgent         = true
+  nimVersion       = var.nimVersion
 }
 // Nginx plus with agent
 module "nginxPlus" {
@@ -90,7 +92,8 @@ module "nginxPlus" {
   instanceType = "n1-standard-2"
   #nim
   #nimAddress = module.nim.info.nim.value.network_interface[0].network_ip
-  nimAgent = true
+  nimAgent   = true
+  nimVersion = var.nimVersion
   #nimAgentPublicKey = tls_private_key.nim-agent.public_key_openssh
   #oidc
   oidcConfigUrl = var.oidcConfigUrl
@@ -120,7 +123,8 @@ module "nginx" {
   instanceType = "n1-standard-2"
   #nim
   #nimAddress = module.nim.info.nim.value.network_interface[0].network_ip
-  nimAgent = true
+  nimAgent   = true
+  nimVersion = var.nimVersion
   #nimAgentPublicKey = tls_private_key.nim-agent.public_key_openssh
   #oidc
   oidcConfigUrl = var.oidcConfigUrl
