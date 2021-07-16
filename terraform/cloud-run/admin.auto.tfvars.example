@@ -2,5 +2,8 @@
 projectPrefix  = "nim-cloudrun"
 gcpProjectId   = "my-project"
 gcpRegion      = "us-central1"
+#gcloud container images describe gcr.io/${GCP_PROJECT}/${IMAGE}@${DIGEST} --format json | jq -r .image_summary.fully_qualified_digest
 image          = "gcr.io/my-project/nim-plus@sha256:3fc64cbf8934ce998c7331215b85733fdf6905db4bdebcac97fb22f10ec4288a"
 serviceAccount = "svc-nim@my-project.iam.gserviceaccount.com"
+serviceDomainWeb = "nim.dimensionc-137.rocks"
+serviceDomainGrpc = "nim-grpc.dimensionc-137.rocks"

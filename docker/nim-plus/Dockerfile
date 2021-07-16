@@ -18,8 +18,9 @@ RUN set -x \
 && mkdir /etc/nginx-manager/ \
 && mkdir /etc/ssl/nginx/ \
 && mkdir /var/log/nginx-agent/
-# keys & license
+# license & tls certs
 COPY licenses/nginx-manager.lic /etc/nginx-manager/nginx-manager.lic
+# repo cert/key
 COPY licenses/nginx-manager.crt /etc/ssl/nginx/nginx-repo.crt
 COPY licenses/nginx-manager.key /etc/ssl/nginx/nginx-repo.key
 # certs

@@ -46,7 +46,7 @@ COPY nim-config/nginx-agent.conf /etc/nginx-agent/nginx-agent.conf
 # start
 
 
-EXPOSE 80 443 10002
+EXPOSE 443
 
 STOPSIGNAL SIGQUIT
 COPY entrypoint.sh /

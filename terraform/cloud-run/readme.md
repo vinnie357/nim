@@ -23,6 +23,6 @@
 token=$(gcloud auth print-identity-token)
 url=$(terraform output --json | jq -r .service_url.value)
 curl -H "Authorization: Bearer $(gcloud auth print-identity-token)" $url
-header="bearer "+$token
-
+header="bearer "$token
+echo $header
 ```

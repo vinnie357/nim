@@ -11,5 +11,6 @@ docker tag $IMAGE gcr.io/$GCP_PROJECT/$IMAGE:$TAG
 docker push gcr.io/$GCP_PROJECT/$IMAGE:$TAG
 #echo "delete container"
 #DIGEST=$(gcloud container images list-tags gcr.io/${GCP_PROJECT}/${IMAGE} --format json | jq -r .[].digest)
-#gcloud container images delete gcr.io/${GCP_PROJECT}/nim-plus@${DIGEST} --force-delete-tags
+# gcloud container images describe gcr.io/${GCP_PROJECT}/${IMAGE}@${DIGEST} --format json | jq -r .image_summary.fully_qualified_digest
+#gcloud container images delete gcr.io/${GCP_PROJECT}/${IMAGE}@${DIGEST} --force-delete-tags
 }

@@ -77,7 +77,7 @@ fileignoreconfig:
 - filename: docker/nim-plus/nim-config/nginx-agent.conf
   checksum: 705768fd740f1009dc6f1d5e02a722a478b458ee49a210e12b332cba9d0bf48a
 - filename: scripts/new_cert.sh
-  checksum: 85f8826a9a742e8ab62651dd1482767708893003757b90986c2f34d5c2e1e561
+  checksum: 09f7ab4a989bf1bc5ccca9fec6ad6efe72648fa6a37c612d0c635ef9791cd3ac
 - filename: docker/nim-plus/nim-config/nginx-manager.conf
   checksum: 1e54dac4b052bad9a1206acb1c7454fc007c6bf783fb021bf1b3bbb538a2c40a
 - filename: modules/nim/templates/startup.sh.tpl

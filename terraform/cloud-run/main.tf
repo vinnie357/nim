@@ -18,7 +18,7 @@ resource "google_cloud_run_service" "nim" {
       containers {
         image = var.image
         ports {
-          container_port = 11000
+          container_port = 443
         }
       }
       service_account_name = var.serviceAccount
@@ -46,3 +46,28 @@ resource "google_cloud_run_service" "nim" {
 
 //   policy_data = data.google_iam_policy.noauth.policy_data
 // }
+#terraform import google_cloud_run_domain_mapping.default {{location}}/{{name}}
+resource "google_cloud_run_domain_mapping" "web-ui-domain" {
+  location = var.gcpRegion
+  name     = var.serviceDomainWeb
+
+  metadata {
+    namespace = var.gcpProjectId
+  }
+
+  spec {
+    route_name = google_cloud_run_service.nim.name
+  }
+}
+resource "google_cloud_run_domain_mapping" "grpc-domain" {
+  location = var.gcpRegion
+  name     = var.serviceDomainGrpc
+
+  metadata {
+    namespace = var.gcpProjectId
+  }
+
+  spec {
+    route_name = google_cloud_run_service.nim.name
+  }
+}

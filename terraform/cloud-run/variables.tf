@@ -25,3 +25,11 @@ variable "image" {
 variable "serviceAccount" {
   description = "Email address of the service account running the instance"
 }
+variable "serviceDomainWeb" {
+  description = "delegated dns name for webui cloudrun"
+  default     = ""
+}
+variable "serviceDomainGrpc" {
+  description = "delegated dns name for grpc cloudrun"
+  default     = ""
+}
