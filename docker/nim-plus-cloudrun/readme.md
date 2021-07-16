@@ -24,8 +24,7 @@ docker build -t "nim-plus-cloudrun" .
 ```bash
 docker run --rm -d \
   --name nim-plus-cloudrun \
-  -p 80:80 \
-  -p 443:443 \
+  -p 8080:8080 \
 	nim-plus-cloudrun
 ```
 
@@ -33,8 +32,7 @@ docker run --rm -d \
 ```bash
 docker run --rm -i \
   --name nim-plus-cloudrun \
-  -p 80:80 \
-  -p 443:443 \
+  -p 8080:8080 \
   nim-plus-cloudrun
 ```
 

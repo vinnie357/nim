@@ -119,8 +119,8 @@ RUN set -x \
 # agent folders
     && mkdir /var/log/nginx-agent/ /etc/nginx-agent/
 # agent config
-COPY nginx-agent.conf /etc/nginx-agent/nginx-agent.conf
-COPY stub-status.conf /etc/nginx/conf.d/
+COPY config/nginx-agent.conf /etc/nginx-agent/nginx-agent.conf
+COPY config/stub-status.conf /etc/nginx/conf.d/
 
 EXPOSE 80
 

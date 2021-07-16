@@ -36,17 +36,21 @@ RUN set -x \
   && apt clean \
   && apt update \
   && apt install -y nginx-manager=${NIM_VERSION} nginx-agent=${NIM_VERSION} \
-  && apt install -y nginx-plus
+  && apt install -y nginx-plus nginx-plus-module-njs \
+  # Forward request and error logs to Docker log collector
+  && ln -sf /dev/stdout /var/log/nginx/access.log \
+  && ln -sf /dev/stderr /var/log/nginx/error.log
 # NGINX config
 RUN rm /etc/nginx/conf.d/default.conf
-COPY nginx-config/ /etc/nginx/conf.d/
+COPY nginx-config/nginx.conf /etc/nginx/nginx.conf
+COPY nginx-config/conf.d/ /etc/nginx/conf.d/
 # config
 COPY nim-config/nginx-manager.conf /etc/nginx-manager/nginx-manager.conf
 COPY nim-config/nginx-agent.conf /etc/nginx-agent/nginx-agent.conf
 # start
 
 
-EXPOSE 443
+EXPOSE 8080
 
 STOPSIGNAL SIGQUIT
 COPY entrypoint.sh /

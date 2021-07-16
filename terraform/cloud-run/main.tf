@@ -18,7 +18,17 @@ resource "google_cloud_run_service" "nim" {
       containers {
         image = var.image
         ports {
-          container_port = 443
+          container_port = 8080
+        }
+        resources {
+          limits = {
+            cpu    = "2000m"
+            memory = "1024Mi"
+          }
+          requests = {
+            cpu    = "2"
+            memory = "512"
+          }
         }
       }
       service_account_name = var.serviceAccount

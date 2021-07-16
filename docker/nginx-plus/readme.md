@@ -15,17 +15,15 @@ docker run --rm -d \
   --name nginx-plus \
   -p 80:80 \
   -p 443:443 \
-  -p 10002:10002 \
 	nginx-plus
 ```
 
 ## with logs
 ```bash
-docker run  -i \
+docker run --rm -it \
   --name nginx-plus \
   -p 80:80 \
   -p 443:443 \
-  -p 10002:10002 \
   nginx-plus
 ```
 
