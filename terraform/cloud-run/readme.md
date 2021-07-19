@@ -16,6 +16,7 @@
 
 - nim-plus in gcr
 - gcloud login
+- service account for cloudrun-service
 
 
 ## getting a token

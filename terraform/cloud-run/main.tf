@@ -22,12 +22,12 @@ resource "google_cloud_run_service" "nim" {
         }
         resources {
           limits = {
-            cpu    = "2000m"
-            memory = "1024Mi"
+            cpu    = "4000m"
+            memory = "2048Mi"
           }
           requests = {
-            cpu    = "2"
-            memory = "512"
+            cpu    = "4"
+            memory = "1024"
           }
         }
       }

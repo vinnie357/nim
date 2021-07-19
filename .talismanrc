@@ -90,3 +90,11 @@ fileignoreconfig:
   checksum: e5b2a697d68ff9a4cceaa29251e70dcc201aa78d14e7c6173200502c12d59e40
 - filename: modules/nginx/templates/startup.sh.tpl
   checksum: 97bea0b87f9cd5eb80c2df148aa89e207a02c8be1415cb68fec3ec6012002ee6
+- filename: docker/nginx-plus-cloudrun/Dockerfile
+  checksum: 18f74cde23a10226e4e016442618d41247d9a691739d3b33e7e1d3fa94501aac
+- filename: docker/nginx-plus-cloudrun/nginx-config/conf.d/http.d/agent-cloudrun.conf
+  checksum: 725260fad853413a7e2bf5ca52187d92249b34f138c1a1ec695657e8fe19dd43
+- filename: docker/nginx-plus-cloudrun/readme.md
+  checksum: d011e91726a24b6ac0f95fa14a86f1833e1e3e89757195b9bba2e18d036ad3ff
+- filename: docker/nginx-plus-cloudrun/nginx-config/nginx-agent.conf
+  checksum: 550319bc727072209457b651ced8b63681d007f4383ee52ad199a54bcbfb9539
