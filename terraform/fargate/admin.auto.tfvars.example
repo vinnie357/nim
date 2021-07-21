@@ -1,0 +1,8 @@
+ec2_key_name      = "my-ec2-key"
+allowed_mgmt_cidr = "<ipchicken>/32"
+region            = "us-east-1"
+repo_token        = "mytoken"
+# set if your not using the ecr example
+# otherise this is set for you
+// nim_image         = "myregistry/image"
+// nginx_image       = "myregistry/image"

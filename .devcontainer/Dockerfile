@@ -35,7 +35,10 @@ RUN set -ex \
 # add extras
 RUN set -ex \
     #https://github.com/vinnie357/devcontainers/tree/main/scripts-library/ubuntu
-    && bash /tmp/scripts/gcloud-debian.sh
+    && bash /tmp/scripts/gcloud-debian.sh \
+    && bash /tmp/scripts/awscli2-debian.sh \
+    && bash /tmp/scripts/awsiam-debian.sh "${USERNAME}" \
+    && bash /tmp/scripts/azcli-debian.sh
 
 # Clean up
 RUN set -ex \

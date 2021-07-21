@@ -98,3 +98,15 @@ fileignoreconfig:
   checksum: d011e91726a24b6ac0f95fa14a86f1833e1e3e89757195b9bba2e18d036ad3ff
 - filename: docker/nginx-plus-cloudrun/nginx-config/nginx-agent.conf
   checksum: 550319bc727072209457b651ced8b63681d007f4383ee52ad199a54bcbfb9539
+- filename: scripts/push_ecr.sh
+  checksum: 4360c95ff02519666fc1d59b4eb3673ddb1f6713a4852c807192615ed9110f57
+- filename: .devcontainer/scripts/awscli2-debian.sh
+  checksum: 436ae451944ed4cd1c477c4a52103f5b2b2557d1cb2957fb7f82cad6d2b4795c
+- filename: .devcontainer/scripts/azcli-debian.sh
+  checksum: e783074cc0c0cbb11a3914d811f5aa6527f423ce7d2bf9957daa17da02defed6
+- filename: terraform/fargate/admin.auto.tfvars.example
+  checksum: e48fd315cf807e2df203cc03f44f6d8f36048e27e0eb6a33a79bcff787575268
+- filename: terraform/fargate/readme.md
+  checksum: 88101b11302bf232e4aeef6ecb1dc366bcd71b253840dcf0eb6c3d062169fd63
+- filename: terraform/fargate/ecs-role/main.tf
+  checksum: d7c9bbf0dd32ebce7b603bc6e22dc538163a7ecd52cea5f62935e8a78e6dc1d0
