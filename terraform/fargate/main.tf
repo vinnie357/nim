@@ -12,7 +12,9 @@ provider "aws" {
 resource "random_id" "id" {
   byte_length = 2
 }
-
+locals {
+  repos = var.repo_list
+}
 
 resource "aws_ecs_cluster" "nim-ecs-cluster" {
   name = format("nim-ecs-cluster-%s", random_id.id.hex)
@@ -32,22 +34,28 @@ module "nginx-role" {
   id     = random_id.id.hex
   token  = var.repo_token
 }
-
+#https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-cpu-memory-error.html
+// CPU value	Memory value (MiB)
+// 256 (.25 vCPU)	512 (0.5GB), 1024 (1GB), 2048 (2GB)
+// 512 (.5 vCPU)	1024 (1GB), 2048 (2GB), 3072 (3GB), 4096 (4GB)
+// 1024 (1 vCPU)	2048 (2GB), 3072 (3GB), 4096 (4GB), 5120 (5GB), 6144 (6GB), 7168 (7GB), 8192 (8GB)
+// 2048 (2 vCPU)	Between 4096 (4GB) and 16384 (16GB) in increments of 1024 (1GB)
+// 4096 (4 vCPU)	Between 8192 (8GB) and 30720 (30GB) in increments of 1024 (1GB)
 resource "aws_ecs_task_definition" "nim-plus" {
   depends_on               = [module.nim-role]
   family                   = "nim"
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
-  cpu                      = 2048
-  memory                   = 4096
+  cpu                      = 4096
+  memory                   = 8192
   execution_role_arn       = module.nim-role.role_arn
   task_role_arn            = module.nim-role.role_arn
   container_definitions    = <<DEFINITION
   [
     {
-      "cpu": ${var.fargate_cpu},
-      "image": "${var.nim_image}",
-      "memory": ${var.fargate_memory},
+      "cpu": ${var.nim_cpu},
+      "image": "${local.repos[var.nim_image]}",
+      "memory": ${var.nim_memory},
       "name": "nim",
       "networkMode": "awsvpc",
       "portMappings": [
@@ -68,7 +76,7 @@ resource "aws_ecs_service" "nim-plus" {
   desired_count   = 1
   launch_type     = "FARGATE"
   network_configuration {
-    subnets          = [aws_subnet.public-a.id]
+    subnets          = [aws_subnet.private-a.id]
     security_groups  = [aws_security_group.fargate_sg.id]
     assign_public_ip = var.nim_public_ip
   }
@@ -91,7 +99,7 @@ resource "aws_ecs_task_definition" "nginx-plus" {
   [
     {
       "cpu": ${var.fargate_cpu},
-      "image": "${var.nginx_image}",
+      "image": "${local.repos[var.nginx_image]}",
       "memory": ${var.fargate_memory},
       "name": "nginx-plus",
       "networkMode": "awsvpc",
@@ -126,7 +134,7 @@ resource "aws_ecs_service" "nginx-plus" {
   desired_count   = var.app_count
   launch_type     = "FARGATE"
   network_configuration {
-    subnets          = [aws_subnet.public-a.id]
+    subnets          = [aws_subnet.private-b.id]
     security_groups  = [aws_security_group.fargate_sg.id]
     assign_public_ip = var.nginx_public_ip
   }

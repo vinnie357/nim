@@ -10,11 +10,11 @@ variable "app_domain" {
 }
 variable "nim_image" {
   description = "nim Docker image to run in the ECS cluster"
-  default     = ""
+  default     = "nim-plus"
 }
 variable "nginx_image" {
   description = "nginx Docker image to run in the ECS cluster"
-  default     = ""
+  default     = "nginx-plus"
 }
 variable "app_image" {
   description = "Docker image to run in the ECS cluster"
@@ -33,6 +33,14 @@ variable "nim_port" {
   #default = 80
   default = 443
 }
+variable "nim_cpu" {
+  description = "Fargate instance CPU units to provision (1 vCPU = 1024 CPU units)"
+  default     = "2048"
+}
+variable "nim_memory" {
+  description = "Fargate instance memory to provision (in MiB)"
+  default     = "1024"
+}
 variable "nginx_port" {
   description = "Port exposed by the docker image to redirect traffic to"
   #. <-- we will need this value
@@ -48,7 +56,7 @@ variable "app_port" {
 
 variable "app_count" {
   description = "Number of docker containers to run"
-  default     = "2"
+  default     = "25"
 }
 
 variable "fargate_cpu" {
@@ -98,4 +106,10 @@ variable "nim_public_ip" {
 }
 variable "nginx_public_ip" {
   default = true
+}
+variable "repo_list" {
+  default = {
+    nginx-plus = "myaccountid.dkr.ecr.myregion.amazonaws.com/nginx-plus-391a"
+    nim-plus = "myaccountid.dkr.ecr.myregion.amazonaws.com/nim-plus-391a"
+  }
 }

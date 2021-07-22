@@ -8,6 +8,7 @@ nim-default.key
 nim-default.crt
 # ecr
 ecr.auto.tfvars
+ecr.auto.tfvars.json
 # Local .terraform directories
 **/.terraform/*
 .terraform.lock.hcl

@@ -85,3 +85,74 @@ resource "aws_default_route_table" "default-rt" {
     Environment = "dev"
   }
 }
+resource "aws_route_table_association" "public-a" {
+  subnet_id      = aws_subnet.public-a.id
+  route_table_id = aws_default_route_table.default-rt.id
+}
+
+# vpc endpoints for ecr privatelink
+resource "aws_vpc_endpoint" "s3" {
+  vpc_id            = aws_vpc.terraform-vpc.id
+  service_name      = "com.amazonaws.${var.region}.s3"
+  vpc_endpoint_type = "Gateway"
+  route_table_ids   = [aws_route_table.private.id]
+
+  tags = {
+    Name        = "s3-endpoint"
+    Environment = "dev"
+  }
+}
+resource "aws_vpc_endpoint" "dkr" {
+  vpc_id              = aws_vpc.terraform-vpc.id
+  private_dns_enabled = true
+  service_name        = "com.amazonaws.${var.region}.ecr.dkr"
+  vpc_endpoint_type   = "Interface"
+  security_group_ids = [
+    aws_security_group.vpce.id,
+  ]
+  subnet_ids = [aws_subnet.private-a.id, aws_subnet.private-b.id]
+
+  tags = {
+    Name        = "dkr-endpoint"
+    Environment = "dev"
+  }
+}
+# platform 1.4.0
+resource "aws_vpc_endpoint" "api" {
+  vpc_id              = aws_vpc.terraform-vpc.id
+  private_dns_enabled = true
+  service_name        = "com.amazonaws.${var.region}.ecr.api"
+  vpc_endpoint_type   = "Interface"
+  security_group_ids = [
+    aws_security_group.vpce.id,
+  ]
+  subnet_ids = [aws_subnet.private-a.id, aws_subnet.private-b.id]
+
+  tags = {
+    Name        = "api-endpoint"
+    Environment = "dev"
+  }
+}
+
+resource "aws_vpc_endpoint" "logs" {
+  vpc_id              = aws_vpc.terraform-vpc.id
+  private_dns_enabled = true
+  service_name        = "com.amazonaws.${var.region}.logs"
+  vpc_endpoint_type   = "Interface"
+  security_group_ids = [
+    aws_security_group.vpce.id,
+  ]
+  subnet_ids = [aws_subnet.private-a.id, aws_subnet.private-b.id]
+
+  tags = {
+    Name        = "logs-endpoint"
+    Environment = "dev"
+  }
+}
+resource "aws_route_table" "private" {
+  vpc_id = aws_vpc.terraform-vpc.id
+  tags = {
+    Name        = "Endpoint Private"
+    Environment = "dev"
+  }
+}

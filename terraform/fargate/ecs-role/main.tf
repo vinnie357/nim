@@ -1,4 +1,5 @@
 #https://github.com/terraform-aws-modules/terraform-aws-atlantis
+data "aws_region" "current" {}
 locals {
     tags = merge(
     {
@@ -83,7 +84,19 @@ data "aws_iam_policy_document" "ecs_task_access_secrets" {
 //     resources = [var.ssm_kms_key_arn]
 //   }
 // }
+data "aws_iam_policy_document" "ecs_task_access_s3" {
+  statement {
+    effect = "Allow"
 
+    resources = flatten([
+      "arn:aws:s3:::prod-${data.aws_region.current.name}-starport-layer-bucket/*"
+    ])
+
+    actions = [
+      "s3:GetObject"
+    ]
+  }
+}
 resource "aws_iam_role_policy" "ecs_task_access_secrets" {
 
   name = "ECSTaskAccessSecretsPolicy"
@@ -95,6 +108,7 @@ resource "aws_iam_role_policy" "ecs_task_access_secrets" {
       concat(
         // data.aws_iam_policy_document.ecs_task_access_secrets_with_kms.*.json,
         data.aws_iam_policy_document.ecs_task_access_secrets.*.json,
+        data.aws_iam_policy_document.ecs_task_access_s3.*.json,
       ),
     ),
     0,

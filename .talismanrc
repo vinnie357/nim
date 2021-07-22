@@ -110,3 +110,9 @@ fileignoreconfig:
   checksum: 88101b11302bf232e4aeef6ecb1dc366bcd71b253840dcf0eb6c3d062169fd63
 - filename: terraform/fargate/ecs-role/main.tf
   checksum: d7c9bbf0dd32ebce7b603bc6e22dc538163a7ecd52cea5f62935e8a78e6dc1d0
+- filename: docker/nginx-plus-fargate/Dockerfile
+  checksum: 1cb3f78e3646d6be9f8244106e59a9e4f1197b792d16f7914a99d8503c4f03b0
+- filename: docker/nginx-plus-fargate/readme.md
+  checksum: 90dc3fdadc62e71ac9812a158ab83bf522b944d4378f54a097bfbdb190dfad15
+- filename: docker/nginx-plus-fargate/config/nginx-agent.conf
+  checksum: b2125988a78e2046e6f3bd5f3b1a1db17b90a0b06388ffb497a0872134a33d10
