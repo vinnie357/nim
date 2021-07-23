@@ -56,7 +56,7 @@ variable "app_port" {
 
 variable "app_count" {
   description = "Number of docker containers to run"
-  default     = "25"
+  default     = "2"
 }
 
 variable "fargate_cpu" {
@@ -110,6 +110,6 @@ variable "nginx_public_ip" {
 variable "repo_list" {
   default = {
     nginx-plus = "myaccountid.dkr.ecr.myregion.amazonaws.com/nginx-plus-391a"
-    nim-plus = "myaccountid.dkr.ecr.myregion.amazonaws.com/nim-plus-391a"
+    nim-plus   = "myaccountid.dkr.ecr.myregion.amazonaws.com/nim-plus-391a"
   }
 }

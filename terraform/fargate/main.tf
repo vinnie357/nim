@@ -127,8 +127,25 @@ resource "aws_ecs_task_definition" "nginx-plus" {
   DEFINITION
 }
 
-resource "aws_ecs_service" "nginx-plus" {
-  name            = format("nginx-plus-service%s", random_id.id.hex)
+resource "aws_ecs_service" "nginx-plus-a" {
+  name            = format("nginx-plus-service-a%s", random_id.id.hex)
+  cluster         = aws_ecs_cluster.nim-ecs-cluster.id
+  task_definition = aws_ecs_task_definition.nginx-plus.arn
+  desired_count   = var.app_count
+  launch_type     = "FARGATE"
+  network_configuration {
+    subnets          = [aws_subnet.private-a.id]
+    security_groups  = [aws_security_group.fargate_sg.id]
+    assign_public_ip = var.nginx_public_ip
+  }
+  service_registries {
+    registry_arn = aws_service_discovery_service.nginx.arn
+  }
+
+}
+
+resource "aws_ecs_service" "nginx-plus-b" {
+  name            = format("nginx-plus-service-b%s", random_id.id.hex)
   cluster         = aws_ecs_cluster.nim-ecs-cluster.id
   task_definition = aws_ecs_task_definition.nginx-plus.arn
   desired_count   = var.app_count
